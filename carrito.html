@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Carrito — Amara</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="producto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="imagenes/amara-logo.jpg" type="image/jpeg">
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" id="brand-name">AMARA</a>
+        <nav>
+            <a href="index.html#thewhy" class="nav-link">Sobre nosotros</a>
+            <a href="index.html#labios" class="nav-link">Labios</a>
+            <a href="index.html#cabello" class="nav-link">Cabello</a>
+            <a href="index.html#piel" class="nav-link">Piel</a>
+            <a href="index.html#ojos" class="nav-link">Ojos</a>
+        </nav>
+        <a href="carrito.html" class="carrito-btn" id="carritoBtn">
+            <svg viewBox="0 0 576 512" width="18"><path fill="currentColor" d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+            <span class="carrito-count" id="carritoCount">0</span>
+        </a>
+    </header>
+
+    <hr>
+
+    <main class="carrito-page">
+        <h1 class="carrito-titulo">Tu carrito</h1>
+
+        <div class="carrito-layout" id="carritoLayout">
+            <!-- Items dinámicos -->
+            <div class="carrito-items" id="carritoItems"></div>
+
+            <!-- Resumen -->
+            <aside class="carrito-resumen" id="carritoResumen">
+                <p class="resumen-titulo">Resumen</p>
+                <div class="resumen-fila">
+                    <span>Subtotal</span>
+                    <span id="resumenSubtotal">$0</span>
+                </div>
+                <div class="resumen-fila">
+                    <span>Envío</span>
+                    <span id="resumenEnvio">Gratis</span>
+                </div>
+                <div class="resumen-fila total">
+                    <span>Total</span>
+                    <span class="resumen-total-num" id="resumenTotal">0</span>
+                </div>
+                <button class="btn-checkout" id="btnCheckout">Finalizar compra</button>
+                <div class="resumen-garantias">
+                    <span>Pago 100% seguro</span>
+                    <span>Devolución en 30 días</span>
+                    <span>Envío gratis en pedidos +$3000</span>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Modal confirmación -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-icono">🌿</div>
+            <h2 class="modal-titulo">¡Gracias por tu compra!</h2>
+            <p class="modal-texto">Tu pedido fue recibido. Te enviaremos una confirmación a tu correo con todos los detalles y el seguimiento de tu envío.</p>
+            <button class="modal-cerrar" id="modalCerrar">Volver al inicio</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">AMARA</div>
+        <div class="footer-social-icons">
+            <a href="javascript:void(0)" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="javascript:void(0)" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="javascript:void(0)" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="javascript:void(0)" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p class="copy">© 2026 Amara · Belleza natural que dura para siempre.</p>
+    </footer>
+
+    <script>
+const Carrito = {
+    get() {
+        try { return JSON.parse(sessionStorage.getItem('amara_carrito') || '[]'); }
+        catch { return []; }
+    },
+    save(items) {
+        sessionStorage.setItem('amara_carrito', JSON.stringify(items));
+        const el = document.getElementById('carritoCount');
+        if (el) el.textContent = items.reduce((s, i) => s + i.cantidad, 0);
+    },
+    quitar(id) { this.save(this.get().filter(i => i.id !== id)); },
+    cambiarCantidad(id, delta) {
+        const items = this.get();
+        const idx = items.findIndex(i => i.id === id);
+        if (idx >= 0) {
+            items[idx].cantidad = Math.max(1, items[idx].cantidad + delta);
+            this.save(items);
+        }
+    },
+    total() { return this.get().reduce((s, i) => s + i.precio * i.cantidad, 0); },
+    count() { return this.get().reduce((s, i) => s + i.cantidad, 0); },
+    vaciar() { this.save([]); }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderCarrito();
+    document.getElementById('carritoCount').textContent = Carrito.count();
+
+    document.getElementById('btnCheckout').addEventListener('click', () => {
+        document.getElementById('modalOverlay').classList.add('visible');
+        Carrito.vaciar();
+        renderCarrito();
+        document.getElementById('carritoCount').textContent = 0;
+    });
+
+    document.getElementById('modalCerrar').addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
+});
+
+function renderCarrito() {
+    const items = Carrito.get();
+    const container = document.getElementById('carritoItems');
+    container.innerHTML = '';
+
+    if (items.length === 0) {
+        container.innerHTML = `
+            <div class="carrito-vacio">
+                <p class="carrito-vacio-titulo">Tu carrito está vacío</p>
+                <p style="margin-bottom:28px;color:#888;font-size:14px">Explorá nuestros productos y encontrá tu favorito.</p>
+                <a href="index.html#productos" class="btn-main" style="text-decoration:none">Ver productos</a>
+            </div>`;
+        document.getElementById('carritoResumen').style.display = 'none';
+        return;
+    }
+
+    document.getElementById('carritoResumen').style.display = 'block';
+
+    items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'carrito-item';
+        div.innerHTML = `
+            <img src="${item.imagen}" alt="${item.nombre}" class="carrito-item-img">
+            <div class="carrito-item-info">
+                <p class="carrito-item-cat">${item.categoria}</p>
+                <p class="carrito-item-nombre">${item.nombre}</p>
+                <div class="carrito-item-controles">
+                    <div class="cantidad-selector">
+                        <button class="cantidad-btn" onclick="cambiarCantidad('${item.id}', -1)">−</button>
+                        <span class="cantidad-num">${item.cantidad}</span>
+                        <button class="cantidad-btn" onclick="cambiarCantidad('${item.id}', 1)">+</button>
+                    </div>
+                    <span style="font-size:13px;color:#999">× $${item.precio.toLocaleString('es-UY')}</span>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px">
+                <span class="carrito-item-precio">${(item.precio * item.cantidad).toLocaleString('es-UY')}</span>
+                <button class="btn-eliminar" onclick="eliminar('${item.id}')" title="Eliminar">✕</button>
+            </div>`;
+        container.appendChild(div);
+    });
+
+    actualizarResumen();
+}
+
+function cambiarCantidad(id, delta) {
+    Carrito.cambiarCantidad(id, delta);
+    renderCarrito();
+    document.getElementById('carritoCount').textContent = Carrito.count();
+}
+
+function eliminar(id) {
+    Carrito.quitar(id);
+    renderCarrito();
+    document.getElementById('carritoCount').textContent = Carrito.count();
+}
+
+function actualizarResumen() {
+    const total = Carrito.total();
+    const envio = total >= 3000 ? 'Gratis' : '$350';
+    const totalFinal = total >= 3000 ? total : total + 350;
+    document.getElementById('resumenSubtotal').textContent = '$' + total.toLocaleString('es-UY');
+    document.getElementById('resumenEnvio').textContent = envio;
+    document.getElementById('resumenTotal').textContent = totalFinal.toLocaleString('es-UY');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Producto — Amara</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="producto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="imagenes/amara-logo.jpg" type="image/jpeg">
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" id="brand-name">AMARA</a>
+        <nav>
+            <a href="index.html#thewhy" class="nav-link">Sobre nosotros</a>
+            <a href="index.html#labios" class="nav-link">Labios</a>
+            <a href="index.html#cabello" class="nav-link">Cabello</a>
+            <a href="index.html#piel" class="nav-link">Piel</a>
+            <a href="index.html#ojos" class="nav-link">Ojos</a>
+        </nav>
+        <a href="carrito.html" class="carrito-btn" id="carritoBtn">
+            <svg viewBox="0 0 576 512" width="18"><path fill="currentColor" d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+            <span class="carrito-count" id="carritoCount">0</span>
+        </a>
+    </header>
+
+    <hr>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <a href="index.html">Inicio</a>
+        <span>›</span>
+        <span id="breadcrumb-categoria">Productos</span>
+        <span>›</span>
+        <span id="breadcrumb-nombre">Cargando...</span>
+    </nav>
+
+    <!-- Producto principal -->
+    <section class="producto-detail" id="productoDetail">
+        <div class="producto-galeria">
+            <img id="productoImagen" src="" alt="" class="producto-img-principal">
+            <div class="galeria-thumbs" id="galeriaThumbs">
+                <!-- thumbs generados por JS -->
+            </div>
+        </div>
+
+        <div class="producto-info-detail">
+            <p class="pd-categoria" id="pdCategoria">—</p>
+            <h1 class="pd-nombre" id="pdNombre">—</h1>
+            <p class="pd-tagline" id="pdTagline">—</p>
+
+            <div class="pd-rating">
+                <span class="estrellas" id="pdEstrellas">★★★★★</span>
+                <span class="rating-num" id="pdReseñas">—</span>
+            </div>
+
+            <div class="pd-precio-row">
+                <span class="pd-precio" id="pdPrecio">—</span>
+                <span class="pd-precio-anterior" id="pdPrecioAnterior"></span>
+                <span class="pd-badge-oferta" id="pdBadge" style="display:none">OFERTA</span>
+            </div>
+
+            <p class="pd-descripcion" id="pdDescripcion">—</p>
+
+            <!-- Selector de cantidad -->
+            <div class="pd-cantidad-row">
+                <span class="pd-label">Cantidad</span>
+                <div class="cantidad-selector">
+                    <button class="cantidad-btn" id="cantidadMenos">−</button>
+                    <span class="cantidad-num" id="cantidadNum">1</span>
+                    <button class="cantidad-btn" id="cantidadMas">+</button>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="pd-botones">
+                <button class="button-producto pd-btn-carrito" id="btnCarrito">
+                    <span>Añadir al carrito</span>
+                    <svg class="cartIcon" viewBox="0 0 576 512"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+                </button>
+                <a href="carrito.html" class="button-ghost pd-btn-comprar" id="btnComprar">Comprar ahora →</a>
+            </div>
+
+            <!-- Beneficios -->
+            <div class="pd-beneficios" id="pdBeneficios"></div>
+
+            <!-- Acordeón ingredientes -->
+            <div class="pd-acordeon">
+                <button class="acordeon-toggle" id="toggleIngredientes">
+                    <span>Ingredientes clave</span>
+                    <span class="acordeon-icon">+</span>
+                </button>
+                <div class="acordeon-body" id="bodyIngredientes"></div>
+            </div>
+
+            <div class="pd-garantias">
+                <span class="garantia-item"><span>✦</span> Envío gratis +$3000</span>
+                <span class="garantia-item"><span>✦</span> Devolución 30 días</span>
+                <span class="garantia-item"><span>✦</span> Pago seguro</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast de confirmación -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span id="toastMsg">Producto añadido al carrito</span>
+    </div>
+
+    <!-- Productos relacionados -->
+    <section class="relacionados-section">
+        <div class="divisor-seccion">
+            <span class="linea"></span>
+            <div class="espacio"><div class="circulo"></div></div>
+            <span class="linea"></span>
+        </div>
+        <h2 class="relacionados-titulo fade-up">También te puede gustar</h2>
+        <div class="relacionados-grid" id="relacionadosGrid"></div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">AMARA</div>
+        <div class="footer-social-icons">
+            <a href="javascript:void(0)" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="javascript:void(0)" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="javascript:void(0)" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="javascript:void(0)" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p class="copy">© 2026 Amara · Belleza natural que dura para siempre.</p>
+    </footer>
+
+    <script>
+const PRODUCTOS = {
+  "aceite-labial":     { id:"aceite-labial",     categoria:"Labios",  nombre:"Aceite Labial Voluminizador",      precio:750,  precioAnterior:920,  estrellas:5, reseñas:247, imagen:"imagenes/ejemplo1.jpg",   descripcionCorta:"Volumen y brillo espejo en una sola pasada.",          descripcion:"Con ácido hialurónico de origen vegetal que rellena e hidrata hasta 24 horas. Acabado espejo sin residuo pegajoso. Disponible en cinco tonos naturales.",                                                                                                        ingredientes:["Ácido Hialurónico Vegetal","Aceite de Rosa Mosqueta","Vitamina E","Manteca de Karité"],    beneficios:["Voluminiza naturalmente","Hidrata 24 horas","Brillo sin pegajosidad","Apto vegano"],           relacionados:["labial-burgundy","aceite-labial-2"] },
+  "labial-burgundy":   { id:"labial-burgundy",   categoria:"Labios",  nombre:"Labial Dark Burgundy",             precio:840,  precioAnterior:null, estrellas:5, reseñas:183, imagen:"imagenes/ejemplo2.jpg",   descripcionCorta:"Color intenso. Acabado sofisticado. Toda la noche.",   descripcion:"Tono vino profundo con cobertura total en una sola pasada. Fórmula enriquecida con manteca de karité orgánica que hidrata mientras dura hasta 12 horas.",                                                                                                         ingredientes:["Pigmentos Minerales","Manteca de Karité Orgánica","Cera de Candelilla","Vitamina C"],        beneficios:["Color en una pasada","Larga duración 12h","No reseca","Sin parabenos"],                        relacionados:["aceite-labial","aceite-labial-2"] },
+  "aceite-labial-2":   { id:"aceite-labial-2",   categoria:"Labios",  nombre:"Lip Gloss Natural",                precio:999,  precioAnterior:null, estrellas:4, reseñas:119, imagen:"imagenes/ejemplo3.webp",  descripcionCorta:"Transparente, luminoso y que cuida tus labios.",       descripcion:"Brillo transparente con extracto de rosa mosqueta y vitamina E. Nutre e ilumina sin pigmentos artificiales. Perfecto para un look natural todo el día.",                                                                                                          ingredientes:["Extracto de Rosa Mosqueta","Vitamina E","Aceite de Marula","Escualano Vegetal"],             beneficios:["Brillo cristalino","Cuida mientras brilla","Sin pigmentos artificiales","Uso diario"],         relacionados:["aceite-labial","labial-burgundy"] },
+  "serum-capilar":     { id:"serum-capilar",     categoria:"Cabello", nombre:"Sérum Capilar Reparador",          precio:1850, precioAnterior:2300, estrellas:5, reseñas:302, imagen:"imagenes/ejemplo4.webp",  descripcionCorta:"Repara la fibra capilar desde la primera aplicación.", descripcion:"Tratamiento intensivo con proteínas de seda y aceite de argán puro. Repara la fibra capilar desde la primera aplicación, reduce el frizz hasta un 87%.",                                                                                                        ingredientes:["Proteínas de Seda","Aceite de Argán Puro","Queratina Vegetal","Pantenol"],                   beneficios:["Repara desde adentro","Reduce frizz 87%","Brillo espejo","Sin residuo graso"],                 relacionados:["mascarilla-argan","aceite-seco"] },
+  "mascarilla-argan":  { id:"mascarilla-argan",  categoria:"Cabello", nombre:"Mascarilla Nutritiva de Argán",    precio:1250, precioAnterior:null, estrellas:5, reseñas:214, imagen:"imagenes/ejemplo5.jpg",   descripcionCorta:"10 minutos para transformar tu cabello.",              descripcion:"Tratamiento semanal con aceite de argán marroquí prensado en frío y manteca de murumuru. Hidratación profunda en solo 10 minutos desde el primer uso.",                                                                                                          ingredientes:["Aceite de Argán Marroquí","Manteca de Murumuru","Proteína de Trigo","Aceite de Coco"],       beneficios:["Hidratación profunda","Cabello sedoso","10 minutos de acción","Uso semanal"],                  relacionados:["serum-capilar","aceite-seco"] },
+  "aceite-seco":       { id:"aceite-seco",       categoria:"Cabello", nombre:"Aceite Seco Capilar",              precio:1480, precioAnterior:null, estrellas:4, reseñas:97,  imagen:"imagenes/ejemplo6.webp",  descripcionCorta:"Brillo instantáneo sin efecto graso.",                 descripcion:"Fórmula ligera con jojoba, semilla de uva y girasol orgánico. Controla el encrespado, aporta brillo instantáneo y sirve como protector térmico.",                                                                                                                ingredientes:["Aceite de Jojoba","Semilla de Uva","Girasol Orgánico","Vitamina E"],                        beneficios:["Absorción ultrarrápida","Protector térmico","Controla el frizz","Sin efecto graso"],           relacionados:["serum-capilar","mascarilla-argan"] },
+  "serum-vitamina-c":  { id:"serum-vitamina-c",  categoria:"Piel",    nombre:"Sérum Vitamina C Iluminador",      precio:1850, precioAnterior:2300, estrellas:5, reseñas:302, imagen:"imagenes/ejemplo7.jpeg",  descripcionCorta:"Luminosidad visible desde la primera semana.",         descripcion:"Potente concentrado antioxidante que unifica el tono y devuelve la luminosidad perdida. Su fórmula ligera se absorbe al instante protegiendo tu piel.",                                                                                                           ingredientes:["Vitamina C Estabilizada 15%","Niacinamida","Ácido Ferúlico","Escualano Vegetal"],            beneficios:["Unifica el tono","Antioxidante","Absorción al instante","Protege del estrés urbano"],          relacionados:["crema-noche","contorno-firmness"] },
+  "crema-noche":       { id:"crema-noche",       categoria:"Piel",    nombre:"Crema Reparadora de Noche",        precio:2500, precioAnterior:null, estrellas:5, reseñas:214, imagen:"imagenes/ejemplo8.avif",  descripcionCorta:"Despertá con una piel más firme cada mañana.",         descripcion:"Enriquecida con péptidos naturales y manteca de karité orgánica. Trabaja mientras descansas reparando la barrera cutánea para una piel más firme.",                                                                                                               ingredientes:["Péptidos Naturales","Manteca de Karité Orgánica","Ácido Hialurónico","Ceramidas Vegetales"], beneficios:["Repara mientras dormís","Piel más firme","Barrera cutánea protegida","Hidratación profunda"],  relacionados:["serum-vitamina-c","contorno-firmness"] },
+  "contorno-firmness": { id:"contorno-firmness", categoria:"Piel",    nombre:"Contorno Pro-Firmness",            precio:2134, precioAnterior:null, estrellas:4, reseñas:97,  imagen:"imagenes/ejemplo9.jpg",   descripcionCorta:"Efecto tensor inmediato para la zona del contorno.",   descripcion:"Con cafeína botánica y ácido hialurónico reduce bolsas y ojeras mientras suaviza las líneas de expresión con efecto tensor inmediato y natural.",                                                                                                                 ingredientes:["Cafeína Botánica","Ácido Hialurónico","Extracto de Té Verde","Vitamina K"],                  beneficios:["Reduce ojeras","Efecto tensor","Resultado inmediato","Zona contorno"],                         relacionados:["serum-vitamina-c","crema-noche"] },
+  "delineador-kohl":   { id:"delineador-kohl",   categoria:"Ojos",    nombre:"Lápiz Delineador Deep Kohl",       precio:1850, precioAnterior:2300, estrellas:5, reseñas:302, imagen:"imagenes/ejemplo11.webp", descripcionCorta:"Trazo intenso. Resistente al agua. Todo el día.",      descripcion:"Fórmula resistente al agua y al sudor que garantiza un trazo intenso que dura todo el día. Ideal para un look definido y profesional en pocos segundos.",                                                                                                         ingredientes:["Pigmentos Minerales Negros","Cera de Abeja Vegana","Vitamina E","Aceite de Jojoba"],         beneficios:["Resistente al agua","Larga duración","Trazo preciso","No irrita"],                             relacionados:["sombra-velvet","mascara-infinite"] },
+  "sombra-velvet":     { id:"sombra-velvet",     categoria:"Ojos",    nombre:"Sombra de Ojos Mineral Velvet",    precio:2500, precioAnterior:null, estrellas:5, reseñas:214, imagen:"imagenes/ejemplo12.png",  descripcionCorta:"Pigmentos minerales de alta adherencia y acabado sedoso.", descripcion:"Acabado sedoso y alta adherencia con pigmentos minerales de origen natural. Color vibrante y duradero con una sola pasada. Enriquecida con vitamina E.",                                                                                                    ingredientes:["Pigmentos Minerales Naturales","Vitamina E","Óxido de Zinc","Mica Natural"],                 beneficios:["Color vibrante","Alta adherencia","Sin pliegues","Cuida el párpado"],                          relacionados:["delineador-kohl","mascara-infinite"] },
+  "mascara-infinite":  { id:"mascara-infinite",  categoria:"Ojos",    nombre:"Máscara de Pestañas Infinite Lift", precio:2134, precioAnterior:null, estrellas:4, reseñas:97, imagen:"imagenes/ejemplo10.jpg",  descripcionCorta:"Volumen, largo y definición sin grumos.",              descripcion:"Diseñada para elevar, alargar y dar volumen sin grumos. Aceite de ricino y pantenol fortalecen cada pestaña desde la raíz para una mirada intensa y abierta.",                                                                                                   ingredientes:["Aceite de Ricino","Pantenol","Cera de Candelilla","Proteína de Seda"],                      beneficios:["Volumen sin grumos","Fortalece la raíz","Efecto lifting","Cepillo ergonómico"],                relacionados:["delineador-kohl","sombra-velvet"] }
+};
+
+const Carrito = {
+    get() { try { return JSON.parse(sessionStorage.getItem('amara_carrito') || '[]'); } catch { return []; } },
+    save(items) { sessionStorage.setItem('amara_carrito', JSON.stringify(items)); const el = document.getElementById('carritoCount'); if (el) el.textContent = this.count(); },
+    agregar(producto, cantidad = 1) { const items = this.get(); const idx = items.findIndex(i => i.id === producto.id); if (idx >= 0) items[idx].cantidad += cantidad; else items.push({ ...producto, cantidad }); this.save(items); },
+    count() { return this.get().reduce((s, i) => s + i.cantidad, 0); }
+};
+    </script>
+    <script src="producto.js"></script>
+</body>
+</html>
